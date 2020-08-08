@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import './providers/user_provider.dart';
+import './routes.dart';
+import './providers.dart';
 import './theme/style.dart';
 
 void main() {
@@ -6,13 +10,18 @@ void main() {
 }
 
 class MoneyBag extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Money Bag',
-      theme: appTheme(),
-      home: Container(),
+    return MultiProvider(
+      child: Consumer<UserProvider>(
+        builder: (ctx, usrPr, _) => MaterialApp(
+          title: 'MoneyBag',
+          theme: appTheme(),
+          initialRoute: usrPr.isAuth ? '/' : '/login',
+          routes: routes,
+        ),
+      ),
+      providers: appProviders,
     );
   }
 }
