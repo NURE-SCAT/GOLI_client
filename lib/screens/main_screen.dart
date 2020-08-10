@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../theme/custom_colors.dart';
 import '../providers/currency_rate_provider.dart';
 import '../components/account_info.dart';
 
@@ -44,13 +45,20 @@ class _MainScreenState extends State<MainScreen> {
     );
 
     return Scaffold(
-        appBar: appBar,
-        body: _isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Center(
-                child: AccountInfo(),
-              ));
+      backgroundColor: CustomColors.backgroundColor,
+      appBar: appBar,
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView(
+              padding: const EdgeInsets.all(8),
+              children: [
+                AccountInfo(),
+                AccountInfo(),
+                AccountInfo(),
+              ],
+            ),
+    );
   }
 }

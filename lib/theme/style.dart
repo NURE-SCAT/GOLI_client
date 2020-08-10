@@ -15,7 +15,7 @@ Map<int, Color> _color = {
 
 ThemeData appTheme() {
   return ThemeData(
-    primarySwatch: MaterialColor(0xFF312BC1, _color),
+    primarySwatch: MaterialColor(0xFF1A1853, _color),
     accentColor: MaterialColor(0xFF00A2FF, _color),
     fontFamily: 'SFUIDisplay',
     visualDensity: VisualDensity.adaptivePlatformDensity,

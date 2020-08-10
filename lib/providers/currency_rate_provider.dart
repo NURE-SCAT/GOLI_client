@@ -9,4 +9,24 @@ class CurrencyRateProvider with ChangeNotifier {
   Future<void> fetchRates() async {
     rates = await api.getCurrencyRates();
   }
+
+  double getBuyByAlias(String alias) {
+    CurrencyRate rate = rates.firstWhere((element) => element.alias == alias,
+        orElse: () => null);
+    if (rate == null) {
+      return -1;
+    }
+
+    return rate.buy;
+  }
+
+  double getSellByAlias(String alias) {
+    CurrencyRate rate = rates.firstWhere((element) => element.alias == alias,
+        orElse: () => null);
+    if (rate == null) {
+      return -1;
+    }
+
+    return rate.sale;
+  }
 }
