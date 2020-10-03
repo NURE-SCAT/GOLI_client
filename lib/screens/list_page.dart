@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../components/detail_page.dart';
+import 'package:provider/provider.dart';
+import '../providers/vote_provider.dart';
+import './vote_page.dart';
 import '../models/vote.dart';
 
 class ListPage extends StatefulWidget {
@@ -14,10 +16,29 @@ class ListPage extends StatefulWidget {
 class _ListPageState extends State<ListPage> {
   List votes;
 
+  bool _isInit = true;
+  bool _isLoading = false;
+
+  Future<void> _fetchData(BuildContext context) async {
+    votes = Provider.of<VoteProvider>(context, listen: false).getVotes();
+  }
+
   @override
-  void initState() {
-    votes = getVotes();
-    super.initState();
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      _fetchData(context).then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+
+    _isInit = false;
+    super.didChangeDependencies();
   }
 
   @override
@@ -61,7 +82,7 @@ class _ListPageState extends State<ListPage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => DetailPage(lesson: vote)));
+                    builder: (context) => VotePage(lesson: vote)));
           },
         );
 
@@ -124,62 +145,12 @@ class _ListPageState extends State<ListPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       appBar: topAppBar,
-      body: makeBody,
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : makeBody,
       bottomNavigationBar: makeBottom,
     );
   }
-}
-
-List getVotes() {
-  return [
-    Vote(
-        title: "Introduction to Driving",
-        type: "City",
-        indicatorValue: 0.33,
-        timestamp: 1601723511,
-        content:
-            "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-    Vote(
-        title: "Observation at Junctions",
-        type: "House",
-        indicatorValue: 0.33,
-        timestamp: 1601723511,
-        content:
-            "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-    Vote(
-        title: "Reverse parallel Parking",
-        type: "Group",
-        indicatorValue: 0.66,
-        timestamp: 1601723511,
-        content:
-            "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-    Vote(
-        title: "Reversing around the corner",
-        type: "Organization",
-        indicatorValue: 0.66,
-        timestamp: 1601723511,
-        content:
-            "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-    Vote(
-        title: "Incorrect Use of Signal",
-        type: "Company",
-        indicatorValue: 1.0,
-        timestamp: 1601723511,
-        content:
-            "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-    Vote(
-        title: "Engine Challenges",
-        type: "City",
-        indicatorValue: 1.0,
-        timestamp: 1601723511,
-        content:
-            "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed."),
-    Vote(
-        title: "Self Driving Car",
-        type: "City",
-        indicatorValue: 1.0,
-        timestamp: 1601723511,
-        content:
-            "Start by taking a couple of minutes to read the info in this section. Launch your app and click on the Settings menu.  While on the settings page, click the Save button.  You should see a circular progress indicator display in the middle of the page and the user interface elements cannot be clicked due to the modal barrier that is constructed.  ")
-  ];
 }

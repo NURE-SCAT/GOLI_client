@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:polls/polls.dart';
 import '../models/vote.dart';
 
-class DetailPage extends StatefulWidget {
+class VotePage extends StatefulWidget {
   final Vote lesson;
-  DetailPage({Key key, this.lesson}) : super(key: key);
+  VotePage({Key key, this.lesson}) : super(key: key);
 
   @override
-  _DetailPageState createState() => _DetailPageState();
+  _VotePageState createState() => _VotePageState();
 }
 
-class _DetailPageState extends State<DetailPage> {
-  double option1 = 0;
-  double option2 = 0;
-  double option3 = 0;
-  double option4 = 0;
-
-  Map<dynamic, dynamic> usersWhoVoted = {};
-  String user = "balik";
-  String creator = "stepa";
-
+class _VotePageState extends State<VotePage> {
   @override
   Widget build(BuildContext context) {
     final levelIndicator = Container(
@@ -37,8 +29,8 @@ class _DetailPageState extends State<DetailPage> {
           border: new Border.all(color: Colors.white),
           borderRadius: BorderRadius.circular(5.0)),
       child: new Text(
-        new DateTime.fromMillisecondsSinceEpoch(widget.lesson.timestamp * 1000)
-            .toString(),
+        new DateFormat.yMMMd().format(DateTime.fromMillisecondsSinceEpoch(
+            widget.lesson.timestamp * 1000)),
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -107,41 +99,48 @@ class _DetailPageState extends State<DetailPage> {
     final bottomContentText = Polls(
       children: [
         // This cannot be less than 2, else will throw an exception
-        Polls.options(title: 'Cairo', value: option1),
-        Polls.options(title: 'Mecca', value: option2),
-        Polls.options(title: 'Denmark', value: option3),
-        Polls.options(title: 'Mogadishu', value: option4),
+        Polls.options(title: 'Cairo', value: widget.lesson.voteDetail.option1),
+        Polls.options(title: 'Mecca', value: widget.lesson.voteDetail.option2),
+        Polls.options(
+            title: 'Denmark', value: widget.lesson.voteDetail.option3),
+        Polls.options(
+            title: 'Mogadishu', value: widget.lesson.voteDetail.option4),
       ],
       question: Text(widget.lesson.content),
-      currentUser: this.user,
-      creatorID: this.creator,
-      voteData: usersWhoVoted,
-      userChoice: usersWhoVoted[this.user],
+      currentUser: widget.lesson.voteDetail.user,
+      creatorID: widget.lesson.voteDetail.creator,
+      voteData: widget.lesson.voteDetail.usersWhoVoted,
+      userChoice:
+          widget.lesson.voteDetail.usersWhoVoted[widget.lesson.voteDetail.user],
       onVoteBackgroundColor: Colors.blue,
       leadingBackgroundColor: Colors.blue,
       backgroundColor: Colors.white,
       onVote: (choice) {
         setState(() {
-          this.usersWhoVoted[this.user] = choice;
+          this
+              .widget
+              .lesson
+              .voteDetail
+              .usersWhoVoted[this.widget.lesson.voteDetail.user] = choice;
         });
         if (choice == 1) {
           setState(() {
-            option1 += 1.0;
+            widget.lesson.voteDetail.option1 += 1.0;
           });
         }
         if (choice == 2) {
           setState(() {
-            option2 += 1.0;
+            widget.lesson.voteDetail.option2 += 1.0;
           });
         }
         if (choice == 3) {
           setState(() {
-            option3 += 1.0;
+            widget.lesson.voteDetail.option3 += 1.0;
           });
         }
         if (choice == 4) {
           setState(() {
-            option4 += 1.0;
+            widget.lesson.voteDetail.option4 += 1.0;
           });
         }
       },
