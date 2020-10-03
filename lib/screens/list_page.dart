@@ -4,6 +4,7 @@ import '../providers/vote_provider.dart';
 import './vote_page.dart';
 import '../models/vote.dart';
 import '../theme/hex_color.dart';
+import './camera_page.dart';
 
 class ListPage extends StatefulWidget {
   ListPage({Key key, this.title}) : super(key: key);
@@ -110,29 +111,6 @@ class _ListPageState extends State<ListPage> {
       ),
     );
 
-    final makeBottom = Container(
-      height: 55.0,
-      child: BottomAppBar(
-        color: HexColor("FFB803"),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.home, color: Colors.white),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.add, color: Colors.white),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.account_box, color: Colors.white),
-              onPressed: () {},
-            )
-          ],
-        ),
-      ),
-    );
     final topAppBar = AppBar(
       elevation: 0.1,
       backgroundColor: HexColor("FFB803"),
@@ -145,7 +123,19 @@ class _ListPageState extends State<ListPage> {
       actions: <Widget>[
         IconButton(
           icon: Icon(
-            Icons.list,
+            Icons.camera,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CameraScreen()),
+            );
+          },
+        ),
+        IconButton(
+          icon: Icon(
+            Icons.add,
             color: Colors.white,
           ),
           onPressed: () {},
@@ -161,7 +151,6 @@ class _ListPageState extends State<ListPage> {
               child: CircularProgressIndicator(),
             )
           : makeBody,
-      bottomNavigationBar: makeBottom,
     );
   }
 }

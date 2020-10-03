@@ -52,13 +52,15 @@ class VotePage extends StatelessWidget {
           children: <Widget>[
             Expanded(flex: 4, child: levelIndicator),
             Expanded(
-                flex: 6,
-                child: Padding(
-                    padding: EdgeInsets.only(left: 10.0),
-                    child: Text(
-                      lesson.type,
-                      style: TextStyle(color: HexColor("FFB803")),
-                    ))),
+              flex: 6,
+              child: Padding(
+                padding: EdgeInsets.only(left: 10.0),
+                child: Text(
+                  lesson.type,
+                  style: TextStyle(color: HexColor("FFB803")),
+                ),
+              ),
+            ),
             Expanded(flex: 4, child: coursePrice)
           ],
         ),
