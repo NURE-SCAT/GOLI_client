@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:splashscreen/splashscreen.dart';
 import './providers.dart';
 import './screens/list_page.dart';
+import './theme/hex_color.dart';
 
 void main() {
   runApp(Goli());
@@ -13,11 +15,19 @@ class Goli extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       child: new MaterialApp(
-        title: 'GOLI votes',
+        title: 'Goli votes',
         theme: new ThemeData(
-            primaryColor: Color.fromRGBO(58, 66, 86, 1.0),
-            fontFamily: 'Raleway'),
-        home: new ListPage(title: 'Votes'),
+          primaryColor: HexColor("FFB803"),
+          fontFamily: 'SFUIText',
+        ),
+        home: SplashScreen(
+            seconds: 2,
+            // the widget to run after running your splashscreen for 1 sec
+            navigateAfterSeconds: ListPage(title: 'Goli votes'),
+            image: Image.asset('assets/images/splash.png'),
+            backgroundColor: HexColor("FFEFC8"),
+            photoSize: 100,
+            loaderColor: HexColor("FFB803")),
       ),
       providers: appProviders,
     );

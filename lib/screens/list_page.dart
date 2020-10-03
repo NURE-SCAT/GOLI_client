@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/vote_provider.dart';
 import './vote_page.dart';
 import '../models/vote.dart';
+import '../theme/hex_color.dart';
 
 class ListPage extends StatefulWidget {
   ListPage({Key key, this.title}) : super(key: key);
@@ -20,7 +21,10 @@ class _ListPageState extends State<ListPage> {
   bool _isLoading = false;
 
   Future<void> _fetchData(BuildContext context) async {
-    votes = Provider.of<VoteProvider>(context, listen: false).getVotes();
+    votes = Provider.of<VoteProvider>(
+      context,
+      listen: true,
+    ).getVotes();
   }
 
   @override
@@ -50,12 +54,12 @@ class _ListPageState extends State<ListPage> {
             padding: EdgeInsets.only(right: 12.0),
             decoration: new BoxDecoration(
                 border: new Border(
-                    right: new BorderSide(width: 1.0, color: Colors.white24))),
-            child: Icon(Icons.autorenew, color: Colors.white),
+                    right: new BorderSide(width: 1.0, color: Colors.black))),
+            child: Icon(Icons.autorenew, color: Colors.black),
           ),
           title: Text(
             vote.title,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
           subtitle: Row(
             children: <Widget>[
@@ -63,7 +67,7 @@ class _ListPageState extends State<ListPage> {
                   flex: 1,
                   child: Container(
                     child: LinearProgressIndicator(
-                        backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
+                        backgroundColor: HexColor("C4C4C4"),
                         value: vote.indicatorValue,
                         valueColor: AlwaysStoppedAnimation(Colors.green)),
                   )),
@@ -72,12 +76,12 @@ class _ListPageState extends State<ListPage> {
                 child: Padding(
                     padding: EdgeInsets.only(left: 10.0),
                     child:
-                        Text(vote.type, style: TextStyle(color: Colors.white))),
+                        Text(vote.type, style: TextStyle(color: Colors.black))),
               )
             ],
           ),
           trailing:
-              Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+              Icon(Icons.keyboard_arrow_right, color: Colors.black, size: 30.0),
           onTap: () {
             Navigator.push(
                 context,
@@ -90,13 +94,12 @@ class _ListPageState extends State<ListPage> {
           elevation: 8.0,
           margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
           child: Container(
-            decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
+            decoration: BoxDecoration(color: HexColor("F9F9F9")),
             child: makeListTile(vote),
           ),
         );
 
     final makeBody = Container(
-      // decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, 1.0)),
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
@@ -110,7 +113,7 @@ class _ListPageState extends State<ListPage> {
     final makeBottom = Container(
       height: 55.0,
       child: BottomAppBar(
-        color: Color.fromRGBO(58, 66, 86, 1.0),
+        color: HexColor("FFB803"),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -132,18 +135,26 @@ class _ListPageState extends State<ListPage> {
     );
     final topAppBar = AppBar(
       elevation: 0.1,
-      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-      title: Text(widget.title),
+      backgroundColor: HexColor("FFB803"),
+      title: Text(
+        widget.title,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
       actions: <Widget>[
         IconButton(
-          icon: Icon(Icons.list),
+          icon: Icon(
+            Icons.list,
+            color: Colors.white,
+          ),
           onPressed: () {},
         )
       ],
     );
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+      backgroundColor: HexColor("FFEFC8"),
       appBar: topAppBar,
       body: _isLoading
           ? Center(
