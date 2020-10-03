@@ -1,4 +1,4 @@
-name: money_bag
+name: goli
 description: A new Flutter project.
 
 
@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^0.1.3
   provider: 3.0.0
   http: ^0.12.0+4
+  polls: ^0.2.2
 
 dev_dependencies:
   flutter_test:

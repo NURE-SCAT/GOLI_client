@@ -1,16 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:polls/polls.dart';
 import '../models/lesson.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   final Lesson lesson;
   DetailPage({Key key, this.lesson}) : super(key: key);
+
+  @override
+  _DetailPageState createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  double option1 = 0;
+  double option2 = 0;
+  double option3 = 0;
+  double option4 = 0;
+
+  Map<dynamic, dynamic> usersWhoVoted = {};
+  String user = "balik";
+  String creator = "stepa";
+
   @override
   Widget build(BuildContext context) {
     final levelIndicator = Container(
       child: Container(
         child: LinearProgressIndicator(
             backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-            value: lesson.indicatorValue,
+            value: widget.lesson.indicatorValue,
             valueColor: AlwaysStoppedAnimation(Colors.green)),
       ),
     );
@@ -21,7 +37,7 @@ class DetailPage extends StatelessWidget {
           border: new Border.all(color: Colors.white),
           borderRadius: BorderRadius.circular(5.0)),
       child: new Text(
-        "\$" + lesson.price.toString(),
+        "\$" + widget.lesson.price.toString(),
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -41,7 +57,7 @@ class DetailPage extends StatelessWidget {
         ),
         SizedBox(height: 10.0),
         Text(
-          lesson.title,
+          widget.lesson.title,
           style: TextStyle(color: Colors.white, fontSize: 45.0),
         ),
         SizedBox(height: 30.0),
@@ -54,7 +70,7 @@ class DetailPage extends StatelessWidget {
                 child: Padding(
                     padding: EdgeInsets.only(left: 10.0),
                     child: Text(
-                      lesson.level,
+                      widget.lesson.level,
                       style: TextStyle(color: Colors.white),
                     ))),
             Expanded(flex: 1, child: coursePrice)
@@ -96,9 +112,47 @@ class DetailPage extends StatelessWidget {
       ],
     );
 
-    final bottomContentText = Text(
-      lesson.content,
-      style: TextStyle(fontSize: 18.0),
+    final bottomContentText = Polls(
+      children: [
+        // This cannot be less than 2, else will throw an exception
+        Polls.options(title: 'Cairo', value: option1),
+        Polls.options(title: 'Mecca', value: option2),
+        Polls.options(title: 'Denmark', value: option3),
+        Polls.options(title: 'Mogadishu', value: option4),
+      ],
+      question: Text('Where is the capital of Egypt?'),
+      currentUser: this.user,
+      creatorID: this.creator,
+      voteData: usersWhoVoted,
+      userChoice: usersWhoVoted[this.user],
+      onVoteBackgroundColor: Colors.blue,
+      leadingBackgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
+      onVote: (choice) {
+        setState(() {
+          this.usersWhoVoted[this.user] = choice;
+        });
+        if (choice == 1) {
+          setState(() {
+            option1 += 1.0;
+          });
+        }
+        if (choice == 2) {
+          setState(() {
+            option2 += 1.0;
+          });
+        }
+        if (choice == 3) {
+          setState(() {
+            option3 += 1.0;
+          });
+        }
+        if (choice == 4) {
+          setState(() {
+            option4 += 1.0;
+          });
+        }
+      },
     );
     final readButton = Container(
         padding: EdgeInsets.symmetric(vertical: 16.0),

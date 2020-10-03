@@ -109,6 +109,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.0"
+  percent_indicator:
+    dependency: transitive
+    description:
+      name: percent_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.7+4"
+  polls:
+    dependency: "direct main"
+    description:
+      name: polls
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.2"
   provider:
     dependency: "direct main"
     description:
