@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:polls/polls.dart';
-import '../models/lesson.dart';
+import '../models/vote.dart';
 
 class DetailPage extends StatefulWidget {
-  final Lesson lesson;
+  final Vote lesson;
   DetailPage({Key key, this.lesson}) : super(key: key);
 
   @override
@@ -37,7 +37,8 @@ class _DetailPageState extends State<DetailPage> {
           border: new Border.all(color: Colors.white),
           borderRadius: BorderRadius.circular(5.0)),
       child: new Text(
-        "\$" + widget.lesson.price.toString(),
+        new DateTime.fromMillisecondsSinceEpoch(widget.lesson.timestamp * 1000)
+            .toString(),
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -49,7 +50,7 @@ class _DetailPageState extends State<DetailPage> {
         Icon(
           Icons.directions_car,
           color: Colors.white,
-          size: 40.0,
+          size: 30.0,
         ),
         Container(
           width: 90.0,
@@ -60,20 +61,20 @@ class _DetailPageState extends State<DetailPage> {
           widget.lesson.title,
           style: TextStyle(color: Colors.white, fontSize: 45.0),
         ),
-        SizedBox(height: 30.0),
+        SizedBox(height: 10.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Expanded(flex: 1, child: levelIndicator),
+            Expanded(flex: 4, child: levelIndicator),
             Expanded(
                 flex: 6,
                 child: Padding(
                     padding: EdgeInsets.only(left: 10.0),
                     child: Text(
-                      widget.lesson.level,
+                      widget.lesson.type,
                       style: TextStyle(color: Colors.white),
                     ))),
-            Expanded(flex: 1, child: coursePrice)
+            Expanded(flex: 4, child: coursePrice)
           ],
         ),
       ],
@@ -82,17 +83,8 @@ class _DetailPageState extends State<DetailPage> {
     final topContent = Stack(
       children: <Widget>[
         Container(
-            padding: EdgeInsets.only(left: 10.0),
-            height: MediaQuery.of(context).size.height * 0.5,
-            decoration: new BoxDecoration(
-              image: new DecorationImage(
-                image: new AssetImage("drive-steering-wheel.jpg"),
-                fit: BoxFit.cover,
-              ),
-            )),
-        Container(
           height: MediaQuery.of(context).size.height * 0.5,
-          padding: EdgeInsets.all(40.0),
+          padding: EdgeInsets.all(30.0),
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
           child: Center(
@@ -120,7 +112,7 @@ class _DetailPageState extends State<DetailPage> {
         Polls.options(title: 'Denmark', value: option3),
         Polls.options(title: 'Mogadishu', value: option4),
       ],
-      question: Text('Where is the capital of Egypt?'),
+      question: Text(widget.lesson.content),
       currentUser: this.user,
       creatorID: this.creator,
       voteData: usersWhoVoted,
@@ -154,21 +146,15 @@ class _DetailPageState extends State<DetailPage> {
         }
       },
     );
-    final readButton = Container(
-        padding: EdgeInsets.symmetric(vertical: 16.0),
-        width: MediaQuery.of(context).size.width,
-        child: RaisedButton(
-          onPressed: () => {},
-          color: Color.fromRGBO(58, 66, 86, 1.0),
-          child:
-              Text("TAKE THIS LESSON", style: TextStyle(color: Colors.white)),
-        ));
+
     final bottomContent = Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.all(20.0),
       child: Center(
         child: Column(
-          children: <Widget>[bottomContentText, readButton],
+          children: <Widget>[
+            bottomContentText,
+          ],
         ),
       ),
     );
