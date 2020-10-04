@@ -4,11 +4,11 @@
 - [Text recognition demo](https://www.youtube.com/watch?v=Z6_2aLphtgk)
 
 ## Main screens:
-![](./1.png)
+![](https://github.com/BaLiKfromUA/GOLI_client/blob/master/img/1.png)
 
-![](./2.png)
+![](https://github.com/BaLiKfromUA/GOLI_client/blob/master/img/2.png)
 
-![](./3.png)
+![](https://github.com/BaLiKfromUA/GOLI_client/blob/master/img/3.png)
 
 ## Getting Started
 
