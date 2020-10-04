@@ -69,25 +69,25 @@ class VoteProvider with ChangeNotifier {
   }
 
   void vote(int voteId, int choice, String userId) {
-    Vote lesson = _list.firstWhere((element) => element.id == voteId);
+    Vote vote = _list.firstWhere((element) => element.id == voteId);
 
-    lesson.voteDetail.usersWhoVoted[userId] = choice;
+    vote.voteDetail.usersWhoVoted[userId] = choice;
     if (choice == 1) {
-      lesson.voteDetail.option1 += 1.0;
+      vote.voteDetail.option1 += 1.0;
     }
     if (choice == 2) {
-      lesson.voteDetail.option2 += 1.0;
+      vote.voteDetail.option2 += 1.0;
     }
     if (choice == 3) {
-      lesson.voteDetail.option3 += 1.0;
+      vote.voteDetail.option3 += 1.0;
     }
     if (choice == 4) {
-      lesson.voteDetail.option4 += 1.0;
+      vote.voteDetail.option4 += 1.0;
     }
 
-    lesson.recalculateProgress();
+    vote.recalculateProgress();
 
-    // todo: send to backend my choice --> id option
+    _api.sendVote(voteId, choice, userId);
     notifyListeners();
   }
 }

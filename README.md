@@ -1,4 +1,4 @@
-# money_bag
+# Goli votes
 
 A new Flutter project.
 

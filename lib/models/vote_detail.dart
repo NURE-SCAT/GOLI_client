@@ -1,5 +1,3 @@
-import 'package:goli/models/vote.dart';
-
 class VoteDetail {
   double option1 = 0;
   double option2 = 0;
@@ -12,7 +10,7 @@ class VoteDetail {
   String definition4 = 'Mogadishu';
 
   Map<dynamic, dynamic> usersWhoVoted = {};
-  String user = "balik";
+  String user = "balik_mem";
   String creator = "stepa";
 
   VoteDetail();
@@ -25,9 +23,9 @@ class VoteDetail {
 
   void setUsersWhoVoted(Map<String, dynamic> json) {
     int choice = json['choice'];
-    String user = json['user'];
+    String curUser = json['user'];
 
-    usersWhoVoted[user] = choice;
+    usersWhoVoted[curUser] = choice;
 
     switch (choice) {
       case 1:

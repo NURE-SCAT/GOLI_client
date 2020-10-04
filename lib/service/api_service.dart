@@ -49,6 +49,8 @@ class ApiService {
     final url = "$_root/$route";
     final response = await http.post(url, headers: headers, body: body);
 
+    print(response.statusCode);
+    print(response.body);
     if (response.statusCode == expectedStatus) {
       return response.body;
     }
