@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1022477733695",
+    "firebase_url": "https://moneybox-5b4d1.firebaseio.com",
+    "project_id": "moneybox-5b4d1",
+    "storage_bucket": "moneybox-5b4d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022477733695:android:b1fb86c01d5a6d819f0d8a",
+        "android_client_info": {
+          "package_name": "com.example.money_bag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022477733695-umcc8pd42n4f0m7et1jdh3oicigrr900.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRqt6AS6-vkgWH6ZQA0IJ0-tfA5wDE2cs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022477733695-umcc8pd42n4f0m7et1jdh3oicigrr900.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

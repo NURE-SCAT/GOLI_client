@@ -56,7 +56,10 @@ class _ListPageState extends State<ListPage> {
             decoration: new BoxDecoration(
                 border: new Border(
                     right: new BorderSide(width: 1.0, color: Colors.black))),
-            child: Icon(Icons.autorenew, color: Colors.black),
+            child: Icon(
+              Icons.question_answer,
+              color: Colors.black,
+            ),
           ),
           title: Text(
             vote.title,
@@ -65,20 +68,23 @@ class _ListPageState extends State<ListPage> {
           subtitle: Row(
             children: <Widget>[
               Expanded(
-                  flex: 1,
-                  child: Container(
-                    child: LinearProgressIndicator(
-                        backgroundColor: HexColor("C4C4C4"),
-                        value: vote.indicatorValue,
-                        valueColor: AlwaysStoppedAnimation(Colors.green)),
-                  )),
-              Expanded(
                 flex: 4,
                 child: Padding(
                     padding: EdgeInsets.only(left: 10.0),
-                    child:
-                        Text(vote.type, style: TextStyle(color: Colors.black))),
-              )
+                    child: Text(
+                      "Category: ${vote.type}",
+                      style: TextStyle(color: Colors.black),
+                    )),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  child: LinearProgressIndicator(
+                      backgroundColor: HexColor("C4C4C4"),
+                      value: vote.indicatorValue,
+                      valueColor: AlwaysStoppedAnimation(Colors.green)),
+                ),
+              ),
             ],
           ),
           trailing:
