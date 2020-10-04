@@ -1,6 +1,14 @@
 # Goli votes
 
-A new Flutter project.
+- [Video demo](https://www.youtube.com/watch?v=5deo4YHIjN4)
+- [Text recognition demo](https://www.youtube.com/watch?v=Z6_2aLphtgk)
+
+## Main screens:
+![](./1.png)
+
+![](./2.png)
+
+![](./3.png)
 
 ## Getting Started
 
