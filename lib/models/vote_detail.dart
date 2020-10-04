@@ -10,7 +10,7 @@ class VoteDetail {
   String definition4 = 'Mogadishu';
 
   Map<dynamic, dynamic> usersWhoVoted = {};
-  String user = "balik_mem";
+  String user = "balik_memes";
   String creator = "stepa";
 
   VoteDetail();

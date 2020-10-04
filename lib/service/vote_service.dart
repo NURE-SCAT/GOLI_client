@@ -4,7 +4,7 @@ import '../models/vote.dart';
 
 extension VoteService on ApiService {
   Future<List<Vote>> getAllQuizes() async {
-    final result = await doGet("api/quizes/", headers, {}, 200);
+    final result = await doGet("api/quizes/?page_size=100", headers, {}, 200);
     if (result != null) {
       final jsonData = json.decode(result);
       final list = (jsonData['results'] as List<dynamic>)
