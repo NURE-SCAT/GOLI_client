@@ -7,8 +7,8 @@ import '../theme/hex_color.dart';
 import '../models/vote.dart';
 
 class VotePage extends StatelessWidget {
-  final Vote lesson;
-  VotePage({Key key, this.lesson}) : super(key: key);
+  final Vote vote;
+  VotePage({Key key, this.vote}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class VotePage extends StatelessWidget {
       child: Container(
         child: LinearProgressIndicator(
             backgroundColor: HexColor("C4C4C4"),
-            value: lesson.indicatorValue,
+            value: vote.indicatorValue,
             valueColor: AlwaysStoppedAnimation(Colors.green)),
       ),
     );
@@ -27,8 +27,8 @@ class VotePage extends StatelessWidget {
           border: new Border.all(color: HexColor("FFB803")),
           borderRadius: BorderRadius.circular(5.0)),
       child: new Text(
-        new DateFormat.yMMMd().format(
-            DateTime.fromMillisecondsSinceEpoch(lesson.timestamp * 1000)),
+        new DateFormat.yMMMd()
+            .format(DateTime.fromMillisecondsSinceEpoch(vote.timestamp * 1000)),
         style: TextStyle(color: HexColor("FFB803")),
       ),
     );
@@ -37,13 +37,8 @@ class VotePage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height: 20.0),
-        Container(
-          width: 90.0,
-          child: new Divider(color: Colors.green),
-        ),
-        SizedBox(height: 10.0),
         Text(
-          lesson.title,
+          vote.title,
           style: TextStyle(color: HexColor("FFB803"), fontSize: 45.0),
         ),
         SizedBox(height: 10.0),
@@ -56,7 +51,7 @@ class VotePage extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(left: 10.0),
                 child: Text(
-                  lesson.type,
+                  vote.type,
                   style: TextStyle(color: HexColor("FFB803")),
                 ),
               ),
@@ -94,16 +89,20 @@ class VotePage extends StatelessWidget {
     final bottomContentText = Polls(
       children: [
         // This cannot be less than 2, else will throw an exception
-        Polls.options(title: 'Cairo', value: lesson.voteDetail.option1),
-        Polls.options(title: 'Mecca', value: lesson.voteDetail.option2),
-        Polls.options(title: 'Denmark', value: lesson.voteDetail.option3),
-        Polls.options(title: 'Mogadishu', value: lesson.voteDetail.option4),
+        Polls.options(
+            title: vote.voteDetail.definition1, value: vote.voteDetail.option1),
+        Polls.options(
+            title: vote.voteDetail.definition2, value: vote.voteDetail.option2),
+        Polls.options(
+            title: vote.voteDetail.definition3, value: vote.voteDetail.option3),
+        Polls.options(
+            title: vote.voteDetail.definition4, value: vote.voteDetail.option4),
       ],
-      question: Text(lesson.description),
-      currentUser: lesson.voteDetail.user,
-      creatorID: lesson.voteDetail.creator,
-      voteData: lesson.voteDetail.usersWhoVoted,
-      userChoice: lesson.voteDetail.usersWhoVoted[lesson.voteDetail.user],
+      question: Text(vote.description),
+      currentUser: vote.voteDetail.user,
+      creatorID: vote.voteDetail.creator,
+      voteData: vote.voteDetail.usersWhoVoted,
+      userChoice: vote.voteDetail.usersWhoVoted[vote.voteDetail.user],
       onVoteBackgroundColor: HexColor("F2C94C"),
       leadingBackgroundColor: HexColor("FFB803"),
       backgroundColor: HexColor("C4C4C4"),
@@ -111,7 +110,7 @@ class VotePage extends StatelessWidget {
         Provider.of<VoteProvider>(
           context,
           listen: true,
-        ).vote(lesson.id, choice, lesson.voteDetail.user); //todo:set user
+        ).vote(vote.id, choice, vote.voteDetail.user); //todo:set user
       },
     );
 

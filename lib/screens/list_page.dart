@@ -16,13 +16,13 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  List votes;
+  List votes = [];
 
   bool _isInit = true;
   bool _isLoading = false;
 
   Future<void> _fetchData(BuildContext context) async {
-    votes = Provider.of<VoteProvider>(
+    votes = await Provider.of<VoteProvider>(
       context,
       listen: true,
     ).getVotes();
@@ -84,10 +84,8 @@ class _ListPageState extends State<ListPage> {
           trailing:
               Icon(Icons.keyboard_arrow_right, color: Colors.black, size: 30.0),
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => VotePage(lesson: vote)));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => VotePage(vote: vote)));
           },
         );
 

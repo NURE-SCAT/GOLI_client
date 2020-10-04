@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import '../service/api_service.dart';
+import '../service/vote_service.dart';
 import '../models/vote.dart';
 import '../models/vote_detail.dart';
 
 class VoteProvider with ChangeNotifier {
+  final _api = ApiService();
+
   List _list = [
     Vote(
-      id: "a",
+      id: 1,
       title: "Introduction to Driving",
       type: "City",
       goal: 100,
@@ -15,7 +19,7 @@ class VoteProvider with ChangeNotifier {
       voteDetail: VoteDetail(),
     ),
     Vote(
-      id: "b",
+      id: 2,
       title: "Observation at Junctions",
       type: "House",
       goal: 100,
@@ -25,7 +29,7 @@ class VoteProvider with ChangeNotifier {
       voteDetail: VoteDetail(),
     ),
     Vote(
-      id: "c",
+      id: 3,
       title: "Reverse parallel Parking",
       type: "Group",
       goal: 1,
@@ -35,7 +39,7 @@ class VoteProvider with ChangeNotifier {
       voteDetail: VoteDetail(),
     ),
     Vote(
-      id: "d",
+      id: 4,
       title: "Reversing around the corner",
       type: "Organization",
       goal: 10,
@@ -45,7 +49,7 @@ class VoteProvider with ChangeNotifier {
       voteDetail: VoteDetail(),
     ),
     Vote(
-      id: "e",
+      id: 5,
       title: "Incorrect Use of Signal",
       type: "Company",
       goal: 123,
@@ -56,11 +60,15 @@ class VoteProvider with ChangeNotifier {
     ),
   ];
 
-  List getVotes() {
+  Future<List> getVotes() async {
+    final newList = await _api.getAllQuizes();
+    if (newList != null) {
+      _list = newList;
+    }
     return _list;
   }
 
-  void vote(String voteId, int choice, String userId) {
+  void vote(int voteId, int choice, String userId) {
     Vote lesson = _list.firstWhere((element) => element.id == voteId);
 
     lesson.voteDetail.usersWhoVoted[userId] = choice;
